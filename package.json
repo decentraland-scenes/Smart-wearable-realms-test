@@ -10,11 +10,12 @@
     "ecs:install": "npm install --save-dev decentraland-ecs@latest",
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next"
   },
-  "devDependencies": {
-    "decentraland-ecs": "next"
+   "devDependencies": {
+    "decentraland-ecs": "latest",
+    "@dcl/eslint-config": "^1.0.1"
   },
   "dependencies": {
-    "@dcl/ui-scene-utils": "^1.8.1"
+    "@dcl/ui-scene-utils": "latest"
   },
   "bundleDependencies": [
     "@dcl/ui-scene-utils"
