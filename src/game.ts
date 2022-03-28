@@ -5,12 +5,14 @@ import { getCurrentRealm } from '@decentraland/EnvironmentAPI'
 
 let visiblePlayers: string[] = []
 
-getConnectedPlayers().then((players) => {
-  players.forEach((player) => {
-    visiblePlayers.push(player.userId)
+getConnectedPlayers()
+  .then((players) => {
+    players.forEach((player) => {
+      visiblePlayers.push(player.userId)
+    })
+    playerCounter.set(visiblePlayers.length)
   })
-  playerCounter.set(visiblePlayers.length)
-})
+  .catch((error) => log(error))
 
 onPlayerConnectedObservable.add((player) => {
   visiblePlayers.push(player.userId)
@@ -32,9 +34,11 @@ let playerCounter = new ui.UICounter(0, -20, 300)
 
 let islandLabel = new ui.CornerLabel('Island: undefined', -150, 350)
 
-const realm = getCurrentRealm().then((realmData) => {
-  islandLabel.set('Island: ' + realmData?.displayName)
-})
+const realm = getCurrentRealm()
+  .then((realmData) => {
+    islandLabel.set('Island: ' + realmData?.displayName)
+  })
+  .catch((error) => log(error))
 
 onRealmChangedObservable.add((realmData) => {
   if (!realmData.room) {
